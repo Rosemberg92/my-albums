@@ -35,7 +35,7 @@ public class AdminController {
 
     @PostMapping("/save-album")
     public String saveAlbum(@RequestParam(name = "file", required = false) MultipartFile folder, Album album,
-            RedirectAttributes feedbackMessage) {
+            RedirectAttributes redirect) {
 
         if (!folder.isEmpty()) {
 
@@ -49,12 +49,12 @@ public class AdminController {
                 album.setFolder(uniqName);
 
                 albumsService.save(album);
-                feedbackMessage.addFlashAttribute("success", "Album saved successfully");
-
+                redirect.addFlashAttribute("success", "Album saved successfully");
+                redirect.addFlashAttribute("songForAlbum", album);
             } catch (Exception e) {
                 e.getCause().getMessage();
             }
         }
-        return "redirect:/admin/album-form";
+        return "redirect:/songs/songs-form";
     }
 }

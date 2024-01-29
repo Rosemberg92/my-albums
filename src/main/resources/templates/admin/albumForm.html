@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
-<head>
+
+<head th:replace="layouts/base-layout :: head">
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
+
 <body>
-    <h1>Formulario Albums</h1>
+    <nav th:replace="layouts/base-layout :: nav"></nav>
 
-    <div th:if="${success!=null}" th:text="${success}"></div>
-    <form th:action="@{/admin/save-album}" th:object="${album}" method="POST" enctype="multipart/form-data">
-        <input type="text" placeholder="Título" th:field="*{title}"/>
-        <input type="text" placeholder="Género"th:field="*{genre}" />
-        <input type="date" placeholder="Año" th:field="*{date}"/>
-        <input type="file" name="file"/>
-        <button type="submit">Guardar album</button>
-
-    </form>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form th:action="@{/admin/save-album}" th:object="${album}" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Título</label>
+                        <input type="text" th:field="*{title}" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Artista</label>
+                        <input type="text" th:field="*{artist}" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Género</label>
+                        <input type="text" th:field="*{genre}" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Año de lanzamiento</label>
+                        <input type="date" placeholder="Año" th:field="*{date}" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Carátula</label>
+                        <input type="file" name="file" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-secondary">Guardar album</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 </body>
 </html>

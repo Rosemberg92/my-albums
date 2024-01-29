@@ -22,6 +22,7 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String artist;
     private String genre;
     private String folder;
     @Temporal(TemporalType.DATE)
@@ -29,16 +30,17 @@ public class Album {
     private Date date;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "album")
-    private List<Artist> artists;
+    private List<Song> songs;
 
 
-    public Album(Long id, String title, String genre, String folder, Date date, List<Artist> artists) {
+    public Album(Long id, String title, String artist, String genre, String folder, Date date, List<Song> songs) {
         this.id = id;
         this.title = title;
+        this.artist = artist;
         this.genre = genre;
         this.folder = folder;
         this.date = date;
-        this.artists = artists;
+        this.songs = songs;
     }
 
     public Album() {
@@ -78,16 +80,9 @@ public class Album {
         this.date = date;
     }
 
-    public List<Artist> getArtists() {
-        return artists;
-    }
 
-    public void setArtists(List<Artist> artists) {
-        this.artists = artists;
-    }
-
-    public void addArtist(Artist artist) {
-        artists.add(artist);
+    public void addSong(Song song) {
+        songs.add(song);
     }
 
     public String getFolder() {
@@ -96,5 +91,21 @@ public class Album {
 
     public void setFolder(String folder) {
         this.folder = folder;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 }

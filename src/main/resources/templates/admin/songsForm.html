@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head th:replace="layouts/base-layout :: head"></head>
+
+<body>
+    <nav th:replace="layouts/base-layout :: nav"></nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="alert alert-success" th:if="${savedSong}" th:text="${savedSong}"></div>
+
+                <form th:action="@{/songs/save}" th:object="${song}" method="POST">
+                    <select class="form-select" th:field="*{album}">
+                        <option th:value="${disc.id}" th:text="${disc.title}">
+
+                        </option>
+                    </select>
+                    <h4 class="text-center mt-4">Canciones</h4>
+                    <div class="form-group my-2">
+                        <input type="text" th:field="*{songName}" class="form-control" placeholder="Título canción" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary form-control">Guardar canción</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+
+</html>
