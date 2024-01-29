@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Formulario Albums</h1>
+
+    <div th:if="${success!=null}" th:text="${success}"></div>
+    <form th:action="@{/admin/save-album}" th:object="${album}" method="POST" enctype="multipart/form-data">
+        <input type="text" placeholder="Título" th:field="*{title}"/>
+        <input type="text" placeholder="Género"th:field="*{genre}" />
+        <input type="date" placeholder="Año" th:field="*{date}"/>
+        <input type="file" name="file"/>
+        <button type="submit">Guardar album</button>
+
+    </form>
+</body>
+</html>
