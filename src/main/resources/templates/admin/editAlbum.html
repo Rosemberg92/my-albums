@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head th:replace="layouts/base-layout :: head"></head>
+
+<body>
+    <nav th:replace="layouts/base-layout :: nav"></nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-6">
+
+                <div class="alert alert-success text-center" th:if="${albumDeleted !=null}" th:text="${albumDeleted}"></div>
+                <div class="alert alert-success text-center" th:if="${albumEdit !=null}" th:text="${albumEdit}"></div>
+                <div class="alert alert-success text-center" th:if="${songMod !=null}" th:text="${songMod}"></div>
+                <div class="alert alert-success text-center" th:if="${songDeleted !=null}" th:text="${songDeleted}"></div>
+                <div class="alert alert-success text-center" th:if="${savedSong !=null}" th:text="${savedSong}"></div>
+                <table class="table table-hover table-stripped text-center">
+                    <tbody>
+                        <tr th:each="album : ${albums}">
+                            <td th:text="${album.title}"></td>
+                            <td>
+                                <a th:href="@{/admin/delete-album/}+${album.id}" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/admin/edit-form/}+${album.id}" class="btn btn-warning">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/songs/add-songs/}+${album.id}" class="btn btn-primary">
+                                    <i class="fas fa-plus-circle"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <div th:each="song : ${album.songs}">
+                                    <small th:text="${song.songName}"></small>
+                                    <a th:href="@{/admin/edit-songs/} +${song.album.id}" class="edit-song">Editar</a>
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

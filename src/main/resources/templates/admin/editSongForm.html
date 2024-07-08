@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head th:replace="layouts/base-layout :: head"></head>
+<body>
+    <nav th:replace="layouts/base-layout :: nav"></nav>
+    
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-4 mt-5">
+                <form th:action="@{/admin/mod-song}" th:object="${song}" method="POST">
+                    <div class="form-group my-2">
+                        <input type="text" th:field="*{songName}" class="form-control" >
+                    </div>
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="hidden" th:field="*{album.id}"/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary form-control">Editar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

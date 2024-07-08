@@ -18,4 +18,13 @@ public class CommentServiceImpl implements ICommentService {
         commentDao.save(comment);
     }
 
+    @Override
+    public Comment getCommentById(Long id) {
+        return commentDao.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteComment(Long id) {
+        commentDao.deleteById(id);
+    }
 }

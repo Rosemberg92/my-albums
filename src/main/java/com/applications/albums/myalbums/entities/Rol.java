@@ -45,5 +45,4 @@ public class Rol {
         this.rolName = rolName;
     }
 
-
 }

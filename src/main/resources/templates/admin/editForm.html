@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+    <head th:replace="layouts/base-layout :: head"></head>
+<body>
+    <nav th:replace="layouts/base-layout :: nav"></nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <form th:action="@{/admin/edit-album}" th:object="${album}" method="post" enctype="multipart/form-data">
+                    <div class="form-group my-2">
+                        <input type="text" class="form-control" placeholder="Título" th:field="*{title}">
+                    </div>
+                    <div class="form-group my-2">
+                        <input type="text" class="form-control" placeholder="Artista" th:field="*{artist}">
+                    </div>
+                    <div class="form-group my-2">
+                        <input type="text" class="form-control" placeholder="Género" th:field="*{genre}">
+                    </div>
+                    <div class="form-group my-2">
+                        <input type="date" class="form-control" placeholder="Fecha lanzamiento" th:field="*{date}">
+                    </div>
+                    <div class="form-group my-2">
+                        <input type="file" name="file" class="form-control">
+                    </div>
+                    <input type="hidden" th:field="*{id}"/>
+
+                    <div class="form-group my-2">
+                        <button type="submit" class="btn btn-secondary form-control">Editar</button>
+
+
+</body>
+</html>

@@ -65,5 +65,4 @@ public class Comment {
         this.album = album;
     }
 
-
 }

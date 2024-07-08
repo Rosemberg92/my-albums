@@ -25,6 +25,8 @@ public class MainUser implements UserDetails {
         this.authorities = authorities;
     }
 
+
+    //! Método para construir un MainUser a partir de un User
     public static MainUser build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRolName().toString()))

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.applications.albums.myalbums.entities.Album;
 
 
-
+//! Interfaz para el acceso a datos de la entidad Album
 @Repository
 public interface IAlbumsDAO extends JpaRepository<Album, Long>{
 }

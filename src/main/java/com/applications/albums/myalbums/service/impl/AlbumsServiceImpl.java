@@ -12,10 +12,11 @@ import com.applications.albums.myalbums.service.IAlbumsService;
 @Service
 public class AlbumsServiceImpl implements IAlbumsService{
 
-
+//! Inyección de dependencia para el acceso a datos de la entidad Album
     @Autowired
     private IAlbumsDAO albumsDAO;
     @Override
+    //! Método para guardar un álbum
     public void save(Album album) {
        albumsDAO.save(album);
     }
@@ -28,6 +29,12 @@ public class AlbumsServiceImpl implements IAlbumsService{
     @Override
     public Album albumById(Long id) {
         return albumsDAO.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteAlbum(Long id) {
+        albumsDAO.deleteById(id);
+        
     }
 
 }

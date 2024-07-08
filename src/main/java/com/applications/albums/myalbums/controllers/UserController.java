@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,27 +33,40 @@ public class UserController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    //! Método para mostrar el formulario de registro
     @GetMapping("/register")
     public String registerUser(){
         return "register";
     }
 
+    //! Método para guardar un usuario
     @PostMapping("/save")
-    public String saveUser(String username, String password,RedirectAttributes redirect){
+    public String saveUser(String username, String password,RedirectAttributes redirect, Model model){
+
+        if(userService.existsByUsername(username)){
+            model.addAttribute("duplicatedUser", "El nombre de usuario ya existe");
+            return "register";
+        }
+
+        if(username == "" || password == ""){
+            model.addAttribute("emptyFields", "Los campos no pueden estar vacíos");
+            return "register";
+        }
+        
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
 
         Rol rolUser = rolService.getByRolName(RolName.ROLE_USER).get();
-        Rol rolAdmin = rolService.getByRolName(RolName.ROLE_ADMIN).get();
+        //Rol rolAdmin = rolService.getByRolName(RolName.ROLE_ADMIN).get();
         Set<Rol> roles= new HashSet<Rol>();
         roles.add(rolUser);
-        roles.add(rolAdmin);
+        //roles.add(rolAdmin);
 
         user.setRoles(roles);
         userService.saveUser(user);
 
-        redirect.addFlashAttribute("success", "Usuario guardado con éxito");
+        redirect.addFlashAttribute("success", "Usuario registrado con éxito");
 
         return "redirect:/login";
     }

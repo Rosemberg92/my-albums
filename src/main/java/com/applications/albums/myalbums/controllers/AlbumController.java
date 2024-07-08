@@ -36,15 +36,22 @@ public class AlbumController {
     @Autowired
     private ICommentService commentService;
 
-
+    //! Método para mostrar los comentarios de un álbum
     @GetMapping("/see-comments/{id}")
-    public String album(@PathVariable Long id, Model model) {
+    public String album(@PathVariable Long id, Model model, Authentication auth) {
+
+        if(auth != null){
+            String username = auth.getName();
+            model.addAttribute("username", username);
+            System.out.println(username);
+        }
 
         Album album = albumsService.albumById(id);
         model.addAttribute("album", album);
         return "comments/seeComments";
     }
 
+    //! Método para cargar el formulario de comentarios
     @GetMapping("/load-album-for-comment/{id}")
     public String albumForComment(@PathVariable Long id, Model model){
 
@@ -58,6 +65,7 @@ public class AlbumController {
         return"comments/commentForm";
     }
 
+    //! Método para guardar un comentario
     @PostMapping("/save-comment")
     public String saveComment(Comment comment, Authentication auth, HttpSession session, RedirectAttributes redirect){
         String username = auth.getName();

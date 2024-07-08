@@ -7,11 +7,12 @@
 
 <body>
     <nav th:replace="layouts/base-layout :: nav"></nav>
-    
-    <div class="alert alert-success" th:if="${savedComment !=null}" th:text="${savedComment}"></div>
+    <div class="alert alert-success text-center" th:if="${savedComment !=null}" th:text="${savedComment}"></div>
+    <div class="alert alert-success text-center" th:if="${commentEdited !=null}" th:text="${commentEdited}"></div>
+    <div class="alert alert-success text-center" th:if="${commentDeleted !=null}" th:text="${commentDeleted}"></div>
     <div class="album-container">
         <div class="galery-item" th:each="item : ${albums}">
-            <a>
+            <a th:href="@{/albums/see-comments/} +${item.id}">
                 <img th:src="@{'/uploads/'+${item.folder}}" class="img-fluid" />
             </a>
 

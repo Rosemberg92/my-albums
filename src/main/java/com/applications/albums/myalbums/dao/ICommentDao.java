@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.applications.albums.myalbums.entities.Comment;
 
+//! Interfaz para el acceso a datos de la entidad Comment
 @Repository
 public interface ICommentDao extends JpaRepository<Comment, Long>{
 

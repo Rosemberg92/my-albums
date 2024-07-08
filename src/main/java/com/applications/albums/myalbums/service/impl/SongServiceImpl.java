@@ -16,4 +16,13 @@ public class SongServiceImpl implements ISongService{
     public void saveSong(Song song) {
         songDao.save(song);
     }
+    @Override
+    public Song findSongById(Long id) {
+        return songDao.findById(id).orElse(null);
+    }
+    @Override
+    public void deleteSong(Long id) {
+        songDao.deleteById(id);
+    }
+
 }

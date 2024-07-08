@@ -8,4 +8,5 @@ public interface IAlbumsService {
     void save(Album album);
     List<Album> listAlbums();
     Album albumById(Long id);
+    void deleteAlbum(Long id);
 }

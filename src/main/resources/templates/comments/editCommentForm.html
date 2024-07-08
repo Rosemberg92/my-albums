@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head th:replace="layouts/base-layout :: head"></head>
+
+<body>
+    <nav th:replace="layouts/base-layout :: nav"></nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-6 text-center">
+                <form th:action="@{/comments/edit/}" th:object="${comment}">
+                    <h2 th:text="${comment.album.title}"></h2>
+                    <div class="row form">
+                        <textarea th:field="*{text}" class="form-control mb-2" rows="8"></textarea>
+                        <input type="hidden" th:field="*{id}"/>
+                        <input type="hidden" th:field="*{album}"/>
+                        <button type="submit" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -32,8 +32,11 @@ public class Album {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "album")
     private List<Song> songs;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "album")
+    private List<Comment> comments;
 
-    public Album(Long id, String title, String artist, String genre, String folder, Date date, List<Song> songs) {
+
+    public Album(Long id, String title, String artist, String genre, String folder, Date date, List<Song> songs, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.artist = artist;
@@ -41,6 +44,7 @@ public class Album {
         this.folder = folder;
         this.date = date;
         this.songs = songs;
+        this.comments = comments;
     }
 
     public Album() {
@@ -62,7 +66,6 @@ public class Album {
         this.title = title;
     }
 
-
     public String getGenre() {
         return genre;
     }
@@ -71,7 +74,6 @@ public class Album {
         this.genre = genre;
     }
 
-
     public Date getDate() {
         return date;
     }
@@ -79,7 +81,6 @@ public class Album {
     public void setDate(Date date) {
         this.date = date;
     }
-
 
     public void addSong(Song song) {
         songs.add(song);
@@ -108,4 +109,13 @@ public class Album {
     public void setSongs(List<Song> songs) {
         this.songs = songs;
     }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
 }

@@ -13,6 +13,7 @@ public class HomeController {
     @Autowired
     private IAlbumsService albumsService;
 
+    //! Método para mostrar la página principal
     @GetMapping("")
     public String home(Model model) {
         model.addAttribute("albums", albumsService.listAlbums());

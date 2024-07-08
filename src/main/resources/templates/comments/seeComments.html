@@ -12,7 +12,7 @@
     <div class="container mt-5">
         <div class="row justify-content-start">
             <div class="col-4">
-                <img th:src="@{'/uploads/'+${album.folder}}" th:alt="${album.folder}" style="width:250px"/>
+                <img th:src="@{'/uploads/'+${album.folder}}" th:alt="${album.folder}" style="width:250px" />
 
                 <h3 th:text="${album.title}" class="my-2"></h3>
                 <h5 th:text="${album.artist}" class="my-2"></h5>
@@ -21,17 +21,41 @@
                 <span th:text="${#dates.format(album.date,'dd-MM-yyyy')}"></span>
 
                 <div class="my-3"></div>
-                    <p>Lista de canciones</p>
-                    <div th:each="i : ${album.songs}">
-                        <small th:text="${i.songName}"></small>
+                <p>Lista de canciones</p>
+                <div th:each="i : ${album.songs}">
+                    <small th:text="${i.songName}"></small>
+                </div>
+                <div class="mt-4">
+                    <a th:href="@{'/albums/load-album-for-comment/' +${album.id}}" class="btn btn-success">
+                        Comentar
+                    </a>
+                </div>
+            </div>
+            <div class="col-7">
+                <div th:each="comment : ${album.comments}">
+
+                    <div th:each="i : ${comment.user}">
+                        <i class="fa-solid fa-user">&nbsp<small th:text=${i.username}></small></i>
                     </div>
-<div class="mt-4">
-    <a th:href="@{'/albums/load-album-for-comment/' +${album.id}}" class="btn btn-success">
-        Comentar
-    </a>
-</div>
+                    <div class="mt-2"></div>
+                    <div th:text="${comment.text}"></div>
+                    <div class="mt-2"></div>
+
+                    <div th:each="i : ${comment.user}">
+                        <span th:if="${i.username == username}">
+                            <a th:href="@{/comments/edit-comment/}+${comment.id}" style="text-decoration:none">
+                                <button class="btn btn-success"><i class="fas fa-pencil-alt"></i></button>
+                            </a>
+                            <a th:href="@{/comments/delete-comment/}+${comment.id}" style="text-decoration:none">
+                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </a>
+
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
