@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
+<head th:replace="layouts/base-layout :: head">
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav th:replace="layouts/base-layout :: nav"></nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-start">
+            <div class="col-4">
+                <img th:src="@{'/uploads/'+${album.folder}}" th:alt="${album.folder}" style="width:250px"/>
+
+                <h3 th:text="${album.title}" class="my-2"></h3>
+                <h5 th:text="${album.artist}" class="my-2"></h5>
+                <h6 th:text="${album.genre}" class="my-2"></h6>
+
+                <span th:text="${#dates.format(album.date,'dd-MM-yyyy')}"></span>
+
+                <div class="my-3"></div>
+                    <p>Lista de canciones</p>
+                    <div th:each="i : ${album.songs}">
+                        <small th:text="${i.songName}"></small>
+                    </div>
+<div class="mt-4">
+    <a th:href="@{'/albums/load-album-for-comment/' +${album.id}}" class="btn btn-success">
+        Comentar
+    </a>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

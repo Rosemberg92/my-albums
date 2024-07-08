@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head th:replace="layouts/base-layout :: head">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <nav th:replace="layouts/base-layout :: nav"></nav>
-    <h1 class="text-center mt-3">My Albums app</h1>
+    
+    <div class="alert alert-success" th:if="${savedComment !=null}" th:text="${savedComment}"></div>
+    <div class="album-container">
+        <div class="galery-item" th:each="item : ${albums}">
+            <a>
+                <img th:src="@{'/uploads/'+${item.folder}}" class="img-fluid" />
+            </a>
+
+            <h4 th:text="${item.title}"></h4>
+        </div>
+    </div>
 </body>
+
 </html>

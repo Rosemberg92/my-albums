@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form th:action="@{/albums/save-comment}" th:object="${comment}" method="POST">
+        <h2 th:text="${comment.album.title}"></h2>
+
+        <textarea th:field="*{text}"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
